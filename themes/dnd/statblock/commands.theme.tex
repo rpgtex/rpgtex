@@ -22,9 +22,20 @@
 % Inline header for stat actions - similar to a paragraph
 % aliased in the environment by \action
 % optional arg is used by legendary actions
+
+\bool_set_false:N \__dnd_inLegendary
 \DeclareDocumentCommand {\RpgStatAction} {O{} m}
 {
-	\par \smallskip \noindent { \RpgFontParagraph {#2\tl_if_blank:eF{#1}{~({#1~actions})}.} }
+	\par \smallskip \noindent { \RpgFontParagraph #2
+
+		\bool_if:NTF\__dnd_inLegendary
+		{
+			{\tl_if_blank:eF{#1}{~({\RpgPlural{#1}{action}})}}
+		}
+		{
+		}
+		.
+	}
 }
 
 % As with action, but allows for an italicised trigger

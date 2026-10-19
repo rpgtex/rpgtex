@@ -13,6 +13,7 @@
 {
 	\keys_set:nn{rpg/stat/legendary}{#1}
 
+	\bool_gset_true:N \__dnd_inLegendary
 	\RpgStatSection{Legendary~Actions\ (\__dnd_statLegendaryUses\ uses)}
 	{\noindent\RpgFontStatBlockLegendary
 		\rpgstringlegendarySpiel\par}
@@ -20,6 +21,8 @@
 	{
 		\RpgStatLegendaryDefiance{}
 	}
+
+
 }
 
 \DeclareDocumentCommand\RpgStatLegendaryDefiance{}
@@ -53,7 +56,7 @@
 
 \keys_set:nn{rpg/stat/mythic}{#1}
 
-\action{\__dnd_statMythicTraitName}\ \__dnd_statMythicTrait \par
+\trait{\__dnd_statMythicTraitName}\ \__dnd_statMythicTrait \par
 \tl_if_empty:oF{\__dnd_statMythicNarration}
 {
 	{\noindent\RpgFontStatBlockLegendary \rpgstringmythicNarrationLeadIn\par}
