@@ -21,6 +21,8 @@
 \RpgThemeStatFormat{
 	\group_begin:
 
+	%% Set legendary mode to false
+	\bool_set_false:N \__dnd_inLegendary
 	%%initial value processing
 	\__dnd_statPreprocessing:
 	\__dnd_checkNickname:n{#1}
