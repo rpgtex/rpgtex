@@ -27,6 +27,7 @@
 
 \DeclareDocumentCommand{\RpgStatSaveEffect}{m O{}}
 {
+	\group_begin:
 	\keys_set:nn { rpg/stat/save}{#2}
 	\tl_set:Ne \__dnd_statSaveNiceName{\prop_item:Ne{\__dnd_StatNames}{\__dnd_statSaveMod}}
 	% \RpgStatAction{#1}\ Make\ a\ \__dnd_statSaveNiceName\ save.
@@ -39,6 +40,7 @@
 		\item[On~Failure:]\ \__dnd_statSaveFail
 		      \tl_if_empty:eF{\__dnd_statSaveSuccess}{\item[On~Success:]\ \__dnd_statSaveSuccess}
 	\end{description}
+	\group_end:
 }
 
 
