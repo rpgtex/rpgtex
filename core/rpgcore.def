@@ -27,7 +27,7 @@
 \RequirePackage{cuted}						%% For \strip environment
 \RequirePackage{nameref}					%% For \nameref command
 \RequirePackage {xparse}					% expl3 programming layer
-\RequirePackage {multicols}					
+\RequirePackage {multicol}					
 \RequirePackage {microtype} % Improve ragged2e hyphenation and overfull boxes
 \RequirePackage {ragged2e}
 
