@@ -121,13 +121,26 @@
 }
 %% ABILITY SCORE BLOCK
 %%Formatters for ability table
+
 \cs_set:Npn \__dnd_format_mod_labels:n #1
 {
 	\rotatebox[origin=c]{90}{\RpgFontStatBlockTitle\scriptsize \hspace{0.1cm} #1 \hspace{0.1cm}}
 }
-\cs_set:Npn \__dnd_format_stat_titles:nn #1#2
+\cs_set:Npn \__dnd_format_stat_titles:nn #1#2 {
+	%% \leavevmode starts the paragraph before the font's \color: otherwise the colour lands in vertical mode at the top
+	&\leavevmode\RpgFontStatBlockTitle \normalsize\hbox_to_wd:nn{\__dnd_statWidth}{\hss #1\ (#2)\hss}
+}
+
+%% Sets \__dnd_statWidth to the width of the widest ability title
+\dim_if_exist:NF \__dnd_statWidth { \dim_new:N \__dnd_statWidth }
+\cs_set_protected_nopar:Npn \__dnd_measure_stat_titles:
 {
-& \RpgFontStatBlockTitle \normalsize  {#1} ~{ (#2)}
+	\dim_zero:N \__dnd_statWidth
+	\seq_map_inline:Nn\__dnd_Stats
+	{
+		\hbox_set:Nn \l_tmpa_box { \RpgFontStatBlockTitle \normalsize \text_uppercase:n{##1}\ (\use:c{__dnd_##1Score}) }
+		\dim_set:Nn \__dnd_statWidth { \dim_max:nn { \__dnd_statWidth } { \box_wd:N \l_tmpa_box } }
+	}
 }
 
 
@@ -138,36 +151,50 @@
 	\setlength\topsep{0pt}
 	\setlength\tabcolsep{3pt}
 
+	%% Typeset the table at its natural width first (a simple, plain tabular, with c columns): if that is too wide, shrink it to fit the line; otherwise, use Y columns
+	\__dnd_measure_stat_titles:
+	\hbox_set:Nn \__dnd_abilityBox { \__dnd_ability_table:nn { simple } { rcccccc } }
 	\begin{center}
-		\maxsizebox{\linewidth}{!}{
-			\begin{RpgTable}[simple,vskip=0pt]{rcccccc}
-				~
-				\seq_map_inline:Nn\__dnd_Stats
-				{
-					\__dnd_format_stat_titles:nn{\text_uppercase:n{##1}}{\use:c{__dnd_##1Score}}
-				}
-				\\
-				\__dnd_format_mod_labels:n{mod}
-				\seq_map_inline:Nn\__dnd_Stats
-				{
-					& \__dnd_format_signed_integer:N{\use:c{__dnd_##1Mod}}
-				}
-
-				%if any proficiencies set, then render the save row
-				\__dnd_if_any_saves:T
-				{
-					\\
-					\__dnd_format_mod_labels:n{save}
-					\seq_map_inline:Nn{\__dnd_Stats}
-					{
-						& \tl_use:c{__##1Save}
-					}
-				}
-
-			\end{RpgTable}
-		}
+		\dim_compare:nNnTF { \box_wd:N \__dnd_abilityBox } > { \linewidth }
+			{
+				\resizebox{\linewidth}{!}{ \box_use_drop:N \__dnd_abilityBox }
+			}
+			{
+				\__dnd_ability_table:nn { } { rYYYYYY }
+			}
 	\end{center}
 	\par \vspace{0.1cm}
+}
+
+\box_if_exist:NF \__dnd_abilityBox { \box_new:N \__dnd_abilityBox }
+
+%% The ability score table, with the given extra table options and column specification
+\cs_set_protected_nopar:Npn \__dnd_ability_table:nn #1#2
+{
+	\begin{RpgTable}[vskip=0pt,noheader,#1]{#2}
+		~
+		\seq_map_inline:Nn\__dnd_Stats
+		{
+			\__dnd_format_stat_titles:nn{\text_uppercase:n{##1}}{\use:c{__dnd_##1Score}}
+		}
+		\\
+		\__dnd_format_mod_labels:n{mod}
+		\seq_map_inline:Nn\__dnd_Stats
+		{
+			& \__dnd_format_signed_integer:N{\use:c{__dnd_##1Mod}}
+		}
+
+		%if any proficiencies set, then render the save row
+		\__dnd_if_any_saves:T
+		{
+			\\
+			\__dnd_format_mod_labels:n{save}
+			\seq_map_inline:Nn{\__dnd_Stats}
+			{
+				& \tl_use:c{__##1Save}
+			}
+		}
+	\end{RpgTable}
 }
 %% DETAILS BLOCK -- languages/skilsl etc
 \cs_set_protected_nopar:Npn \__dnd_stat_details:
