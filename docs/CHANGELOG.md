@@ -5,6 +5,19 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.0.6] 2026-11-7
+
+Minor bugfixes and improvements to the appearance
+
+* Added a guard against `cuted` environments (known to be fragile) being swallowed when they're the last object in the document. 
+* Improved the spacing rules for the stat-table in D&D statblocks. 
+    * The table is now always full-width, and shrinks the internal text if the environment is too narrow. 
+    * We opted for a simpler algorithm which shrinks the column headers independently. At narrow rendering widths, this may cause the font sizes to differ between columns. 
+
+## [1.0.5] 2026-10-19
+
+* Minor bugfixes to the legendary action blocks in D&D theme
+
 ## [1.0.4] 2026-10-15
 
 * Added a new contouring option: `RpgContourIfDifferent', which only applies the contouring if the inner and outer colours are different, to prevent blocky-looking text.

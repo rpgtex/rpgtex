@@ -26,7 +26,9 @@
 \bool_set_false:N \__dnd_inLegendary
 \DeclareDocumentCommand {\RpgStatAction} {O{} m}
 {
-	\par \smallskip \noindent { \RpgFontParagraph #2
+	\par
+	\dim_compare:nNnT { \prevdepth } > { -999pt } { \smallskip }
+	\noindent { \RpgFontParagraph #2
 
 		\bool_if:NTF\__dnd_inLegendary
 		{

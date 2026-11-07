@@ -121,13 +121,16 @@
 }
 %% ABILITY SCORE BLOCK
 %%Formatters for ability table
+
 \cs_set:Npn \__dnd_format_mod_labels:n #1
 {
 	\rotatebox[origin=c]{90}{\RpgFontStatBlockTitle\scriptsize \hspace{0.1cm} #1 \hspace{0.1cm}}
 }
-\cs_set:Npn \__dnd_format_stat_titles:nn #1#2
-{
-& \RpgFontStatBlockTitle \normalsize  {#1} ~{ (#2)}
+\cs_set:Npn \__dnd_format_stat_titles:nn #1#2 {
+	%% \leavevmode starts the paragraph before the font's \color: otherwise the colour lands in vertical mode at the top
+	%% of the (p-type) cell, and the cell drops a line below the row.
+	%% In a Y cell, \linewidth is the width of the column: a title too wide for its column is shrunk to fit, rather than wrapping
+	&\leavevmode\RpgFontStatBlockTitle \normalsize\maxsizebox{\linewidth}{!}{#1\ (#2)}
 }
 
 
@@ -137,38 +140,35 @@
 	\color {StatblockHeading}
 	\setlength\topsep{0pt}
 	\setlength\tabcolsep{3pt}
-
 	\begin{center}
-		\maxsizebox{\linewidth}{!}{
-			\begin{RpgTable}[simple,vskip=0pt]{rcccccc}
-				~
-				\seq_map_inline:Nn\__dnd_Stats
-				{
-					\__dnd_format_stat_titles:nn{\text_uppercase:n{##1}}{\use:c{__dnd_##1Score}}
-				}
+		\begin{RpgTable}[vskip=0pt,noheader]{rYYYYYY}
+			~
+			\seq_map_inline:Nn\__dnd_Stats
+			{
+				\__dnd_format_stat_titles:nn{\text_uppercase:n{##1}}{\use:c{__dnd_##1Score}}
+			}
+			\\
+			\__dnd_format_mod_labels:n{mod}
+			\seq_map_inline:Nn\__dnd_Stats
+			{
+				& \__dnd_format_signed_integer:N{\use:c{__dnd_##1Mod}}
+			}
+
+			%if any proficiencies set, then render the save row
+			\__dnd_if_any_saves:T
+			{
 				\\
-				\__dnd_format_mod_labels:n{mod}
-				\seq_map_inline:Nn\__dnd_Stats
+				\__dnd_format_mod_labels:n{save}
+				\seq_map_inline:Nn{\__dnd_Stats}
 				{
-					& \__dnd_format_signed_integer:N{\use:c{__dnd_##1Mod}}
+					& \tl_use:c{__##1Save}
 				}
-
-				%if any proficiencies set, then render the save row
-				\__dnd_if_any_saves:T
-				{
-					\\
-					\__dnd_format_mod_labels:n{save}
-					\seq_map_inline:Nn{\__dnd_Stats}
-					{
-						& \tl_use:c{__##1Save}
-					}
-				}
-
-			\end{RpgTable}
-		}
+			}
+		\end{RpgTable}
 	\end{center}
 	\par \vspace{0.1cm}
 }
+
 %% DETAILS BLOCK -- languages/skilsl etc
 \cs_set_protected_nopar:Npn \__dnd_stat_details:
 {
