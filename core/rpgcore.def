@@ -24,7 +24,10 @@
 %\RequirePackage{dblfloatfix}				%% Float fixes for twocolumn environments
 \RequirePackage{stfloats}				%% Float fixes for twocolumn environments
 \RequirePackage{adjustbox}					%% For RpgCard boxes
-\RequirePackage{cuted}						%% For \strip environment
+
+%% For strip environment -- needs some care as cuted can drop content if its the last thing on the page
+\RequirePackage{cuted}					
+\AtEndDocument{\ifvoid\hold@viper\else\ifdim\pagegoal=\maxdimen\par\null\fi\fi} %% should fix the cuted issue
 \RequirePackage{nameref}					%% For \nameref command
 \RequirePackage {xparse}					% expl3 programming layer
 \RequirePackage {multicol}					
