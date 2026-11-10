@@ -81,11 +81,23 @@
 	\__rpg_join:NVVn{\__dnd_statSubtitle}{\__dnd_statSize}{\__dnd_statType}{\ }
 	\__rpg_join:NVVn{\__dnd_statSubtitle}{\__dnd_statSubtitle}{\__dnd_statAlignment}{,\ }
 
-	\tl_if_empty:eF{\__dnd_statSubtitle}
+
+	\tl_if_empty:eF{\__dnd_statSource}
 	{
-		\begin {hangingpar}
-		\textit {\__dnd_statSubtitle}
-		\end {hangingpar}
+		\par \begin{minipage}[t]{0.5\linewidth}
+			}
+			\tl_if_empty:eF{\__dnd_statSubtitle}
+			{
+				\begin {hangingpar}
+				\textit {\__dnd_statSubtitle}
+				\end {hangingpar}
+			}
+			\tl_if_empty:eF{\__dnd_statSource}
+			{
+		\end{minipage}
+		\begin{minipage}[t]{0.5\linewidth}
+			\raggedleft \textit{Source:~\__dnd_statSource}
+		\end{minipage}
 	}
 }
 

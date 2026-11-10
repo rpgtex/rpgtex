@@ -1,5 +1,6 @@
 % !TEX root = ../documentation.tex
 
+
 %% A row of the statistics tables: \statRow{<property>, <aliases>}{<effect>}{<default>}[<notes>]
 %% The first name is the property itself, and any others are shown beneath it as aliases; a group of properties may be braced as one name
 \ExplSyntaxOn
@@ -54,6 +55,7 @@
 				\statRow{nickname, name}{A shorter name for the creature, such as `Gorgenhar' for `Gorgenhar, the Devourer'.}{\textit{(the title)}}[Use \cmd{RpgStatName} (or \cmd*{name}) in the abilities to refer to the creature by this name.]
 				\statRow{size}{The size of the creature, shown beneath its name.}{\texttt{Medium}}
 				\statRow{speed}{The speed of the creature, used as it is written.}{\texttt{30ft}}[Include the units and any other movement, such as \texttt{30ft, fly 60ft}.]
+				\statRow{source}{The origin of the statblock}{\it (empty)}[Use if copying stat blocks from other sources]
 				\statRow{type}{The type of the creature, shown after its size.}{\texttt{Creature}}
 			\end{RpgTable}
 

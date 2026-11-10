@@ -124,6 +124,7 @@
 		senses = darkvision 60ft, languages = Abyssal,
 		damage-resistances = fire, condition-immunities = poisoned,
 		cr = 7,
+		source={My Imagination}
 	]
 		\section{Traits}
 			\trait{Fiery Aura} At the start of each of its turns, each creature within 5ft of \name{} takes \RpgDice{1d6} fire damage.
