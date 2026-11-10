@@ -65,3 +65,14 @@
 % \end{noindent}
 
 
+%% A variant of the usual \titleline command, but which respects the current \linewidth. 
+%% Good for environments that might be wrapped or indented
+%% Sacrifice: loose the alignment
+\NewDocumentCommand\RpgThemeTitleLine{m}{%
+	\vskip\topskip \hrule\@height\z@ \nobreak \vskip-\topskip
+	\begingroup
+	\parindent\z@ \leftskip\z@ \rightskip\z@
+	\fontsize{1pt}{1pt}\selectfont % squash the strut that \everypar adds to the line
+	\leavevmode #1\endgraf         % \endgraf, not \par: wrapfig doesn't count this as a line
+	\endgroup
+	\hrule\@height\z@ \nobreak}

@@ -5,6 +5,11 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] 2027-11-10
+
+* Added a `source' field to the D&D statblocks
+* Added `\RpgStatLine`, a variant of `\titleline` which respects the current line width
+
 ## [1.0.6] 2026-11-7
 
 Minor bugfixes and improvements to the appearance

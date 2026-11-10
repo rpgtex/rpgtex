@@ -56,6 +56,12 @@
 		{
 			Stores the code which typesets the title when \cmd{maketitle} is called in \texttt{header} mode. Unlike the cover, this is ordinary text, placed at the point where \cmd{maketitle} is called.
 		}
+		\RpgFunction{RpgThemeTitleLine}{\param{code}}
+		{
+			A variant of the
+			\href{https://tex.org.uk/macros/latex/contrib/titlesec/titlesec.pdf}{\cmd*{titleline}}
+			command which always respects the current \cmd{textwidth}, making it more suitable for titles which might be nested next to \env*{wrapfigures}
+		}
 		\RpgFunction{RpgThemeTitleMode}{\param{cover / header}}
 		{
 			Selects which of the two designs \cmd{maketitle} produces. Any other value raises an error. The \texttt{rpgbook} class selects \texttt{cover}; otherwise, the default is \texttt{header}.
