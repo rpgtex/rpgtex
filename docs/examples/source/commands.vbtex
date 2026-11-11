@@ -108,3 +108,17 @@
 	\RpgToggle{HardMode}
 
 	The dragon has \RpgIfSwitch{HardMode}{500}{200} HP.
+
+% example = rpg-number
+% highlight = RpgNumber
+	\RpgNumber{100} % no effect
+
+	\RpgNumber{123456789}
+
+	\RpgNumberSetSeparator{;}
+
+	\RpgNumber{123456789}
+
+	\RpgNumberSetDigits{4}
+
+	\RpgNumber{1234} % no formatting applied

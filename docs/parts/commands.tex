@@ -197,6 +197,24 @@
 			\RpgGetExample{cmd-emph}
 		}
 
+		\RpgFunction{RpgNumber}{\param{text}}
+		{
+			Formats numbers (using the \texttt{siunitx} package) so that they have (for example), comma-delimiters above a certain size.
+
+			If the value is not a pure number, it is printed without alteration.
+
+			\RpgGetExample{rpg-number}
+		}
+		\RpgFunction{RpgNumberSetSeparator}{\param{text}}
+		{
+		Sets the separator used by \cmd{RpgNumber}. The default value is ``{,}''.
+		}
+		\RpgFunction{RpgNumberSetDigits}{\param{count}}
+		{
+			Sets the minimum number of digits required by \cmd{RpgNumber} before the formatting applies. The default value is 3.
+		}
+
+
 		\RpgFunction{RpgOrdinal}{[<format>]\param{number}}
 		{
 			Typesets an integer followed by its English ordinal suffix (\texttt{st}, \texttt{nd}, \texttt{rd} or \texttt{th}), correctly handling \texttt{11th}, \texttt{12th} and \texttt{13th}. The optional \texttt{format} is a command applied to the suffix only, such as \cmd*{textbf}.

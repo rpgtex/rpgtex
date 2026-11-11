@@ -8,8 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [unreleased]
 
 * Improved the spacing on the saves and spell blocks
-* added the 'singular' flag to the legendary and mythic sections
+* added the 'singular' flag for the spellcasting, legendary and mythic sections of dnd stats
 * Added the multiattack environment
+* Added the \\RpgStatName* and \\RpgStatName** variants. Updated the legenndary actions to use this 
+* Added the \RpgNumber formatter and its helpers. Updated dnd statblocks to use this for their xp field
+* Added the 'self' option for \RpgStatSaves in dnd stat blocks
 
 ## [1.1.0] 2027-11-10
 

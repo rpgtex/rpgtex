@@ -53,6 +53,7 @@
 				\statRow{hit-points, hp, HP}{The hit points, usually expressed as a dice expression.}{\texttt{1d8}}[Valid dice expressions are resolved automatically with \cmd{RpgDice}, otherwise printed as-is.]
 				\statRow{initiative}{The initiative bonus, used as it is written.}{\textit{(computed)}}[If it is not given, the Dexterity modifier is used.]
 				\statRow{nickname, name}{A shorter name for the creature, such as `Gorgenhar' for `Gorgenhar, the Devourer'.}{\textit{(the title)}}[Use \cmd{RpgStatName} (or \cmd*{name}) in the abilities to refer to the creature by this name.]
+				\statRow{singular}{A flag, which removes the article `the' from the generated text, for statblocks that are a creature's name (not a species).}{\textit{(off)}}
 				\statRow{size}{The size of the creature, shown beneath its name.}{\texttt{Medium}}
 				\statRow{speed}{The speed of the creature, used as it is written.}{\texttt{30ft}}[Include the units and any other movement, such as \texttt{30ft, fly 60ft}.]
 				\statRow{source}{The origin of the statblock}{\it (empty)}[Use if copying stat blocks from other sources]
@@ -128,6 +129,14 @@
 			\RpgVariable{RpgStatName}[name]
 			{
 				The name of the creature, as used in its abilities: its \texttt{nickname}, if one was given, and otherwise its title.
+			}
+			\RpgVariable{RpgStatName*}[RpgStatName**]
+			{
+				Variants of \cmd{RpgStatName} which include a definitive article, unless the \texttt{singular} command is set.
+
+				In \texttt{singular} mode, \cmd{RpgStatName*} and \cmd{RpgStatName**} are equal to the unstarred version.
+
+				If the \texttt{singular} option is not set, \cmd{RpgStatName*} is equal to ``the \RpgStatName'', and \cmd{RpgStatName**} is ``The \RpgStatName''. These commands are used internally in the auto-generated text for spellcasting and legendary actions.
 			}
 			\RpgFunction{RpgStatSetName}{\param{name}}
 			{
@@ -222,7 +231,7 @@
 					\statRow{failure, fail}{The effect on a failed save.}{\textit{(none)}}
 					\statRow{modifier}{The ability used for the save: \texttt{str}, \texttt{dex}, \texttt{con}, \texttt{int}, \texttt{wis} or \texttt{cha}, or the same in capitals.}{\texttt{dex}}
 					\statRow{origin}{Where an area effect is centred.}{\textit{(none)}}[Shown as `Choose a point \ldots' before the area.]
-					\statRow{shape}{\texttt{single}, \texttt{cone}, \texttt{sphere}, \texttt{line} or \texttt{cube}.}{\texttt{single}}[\texttt{single} affects one target within the \texttt{size}; the others affect every target in an area of that shape and \texttt{size}.]
+					\statRow{shape}{\texttt{single}, \texttt{self}, \texttt{cone}, \texttt{sphere}, \texttt{line} or \texttt{cube}.}{\texttt{single}}[\texttt{single} affects one target within the \texttt{size}; the others affect every target in an area of that shape and \texttt{size}. The \texttt{self} option is used for effects that emanate from a creature (and so don't have a single point source, as they depend on creature size).]
 					\statRow{size}{The range, or the size of the area, in feet.}{\texttt{60}}[The units are added if missing.]
 					\statRow{success, succeed}{The effect on a successful save.}{\textit{(none)}}[Left out if it is empty.]
 					\statRow{target}{\texttt{creature} or \texttt{enemy}.}{\texttt{creature}}
@@ -297,7 +306,6 @@
 				\begin{RpgTable}{lXl}
 					Option & Effect & Default
 					\statRow{defiance}{A flag, which adds the homebrew `Legendary Defiance' action.}{\textit{(off)}}
-					\statRow{singular}{A flag, which removes the article `the' from the generated text, for statblocks that are a creature's name (not a species).}{\textit{(off)}}
 					\statRow{uses}{The number of legendary actions the creature may take.}{\texttt{3}}
 				\end{RpgTable}
 			}

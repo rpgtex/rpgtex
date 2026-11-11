@@ -10,7 +10,7 @@
 	\RpgThemeTLKey{dc}	{\__dnd_statSaveDC}	{10}
 	\RpgThemeTLChoiceKey{modifier}	{\__dnd_statSaveMod}	{str,dex,con,int,wis,cha} {dex}
 	\RpgThemeTLMapKey{modifier}		{\__dnd_statSaveMod}	{STR,DEX,CON,INT,WIS,CHA}{str,dex,con,int,wis,cha} {DEX}
-	\RpgThemeTLChoiceKey{shape}		{\__dnd_statSaveShape}	{single,cone,sphere,line,cube} {single}
+	\RpgThemeTLChoiceKey{shape}		{\__dnd_statSaveShape}	{single,self,cone,sphere,line,cube} {single}
 	\RpgThemeTLChoiceKey{target}	{\__dnd_statSaveTarget}	{creature,enemy} {creature}
 	\RpgThemeTLKey{size}			{\__dnd_statSaveSize}	{60}
 	\RpgThemeTLKey{origin}			{\__dnd_statSaveOrigin}	{}
@@ -80,6 +80,7 @@
 			{sphere}{\ within\ a\ \__dnd_statSaveSize\ sphere}
 			{line}{\ in\ a\ \__dnd_statSaveSize\ line}
 			{cube}{\ in\ a\ \__dnd_statSaveSize\ cube}
+			{self}{\ within\ \__dnd_statSaveSize\ of\ \RpgStatName*{}\ }
 	}
 
 
