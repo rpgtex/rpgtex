@@ -24,7 +24,6 @@
 	\RpgThemeTLKey			{extra}		{\__dnd_attackExtra}	{}
 }
 
-
 %% Formats the attack into the standard form:
 %% Melee/Ranged (distance-in-ft): +x to hit. On hit [damage-calculation] damage, [optional plus] [optional or]. 
 
@@ -42,7 +41,7 @@
 	\__dnd_make_modifier:nnn{\__dnd_attackToHit}{\__dnd_attackStat}{\__dnd_attackBonus}
 
 	%%Typeset the main attack
-	\RpgStatAction{#1}~
+		\RpgStatAction{#1}~
 	\str_case_e:nn {\__dnd_attackDistance}
 	{
 		{ melee }   {\textit{Melee\__dnd_attackType{}~(\__dnd_attackReach):}~}
@@ -59,6 +58,23 @@
 	\group_end:
 }
 % \end{noindent}
+
+\tcbset{rpgstatmultiattack/.style={
+blank, breakable,
+borderline~west={0.8pt}{0pt}{StatblockRule},
+left=10pt, before~skip=2pt, after~skip=5pt,
+}}
+\DeclareDocumentEnvironment{RpgStatMultiAttack}{O{Multiattack} m}
+{
+	\RpgStatAction{#1}~#2\par
+	\bool_set_true:N{\__dnd_statInMultiAttack}
+	\begin{tcolorbox}[rpgstatmultiattack]
+		}
+		{
+	\end{tcolorbox}
+	\bool_set_false:N{\__dnd_statInMultiAttack}
+
+}
 
 \cs_set_protected_nopar:Npn \__dnd_make_modifier:nnn#1#2#3
 {

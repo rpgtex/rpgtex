@@ -24,11 +24,13 @@
 % optional arg is used by legendary actions
 
 \bool_set_false:N \__dnd_inLegendary
+\bool_set_false:N{\__dnd_statInMultiAttack}
 \DeclareDocumentCommand {\RpgStatAction} {O{} m}
 {
 	\par
 	\dim_compare:nNnT { \prevdepth } > { -999pt } { \smallskip }
-	\noindent { \RpgFontParagraph #2
+	\noindent {
+		\bool_if:NTF{\__dnd_statInMultiAttack}{\gillius\bfseries}{\RpgFontParagraph }#2
 
 		\bool_if:NTF\__dnd_inLegendary
 		{
@@ -56,8 +58,9 @@
 	\tl_set:Nn \__dnd_statName {#1}
 }
 
-\DeclareDocumentCommand\RpgStatName{}
+\DeclareDocumentCommand\RpgStatName{s s}
 {
+	\IfBooleanT{#1}{\IfBooleanTF{#2}{\MakeTitlecase{\__dnd_statArticle}}{\__dnd_statArticle}}
 	\__dnd_statName{}
 }
 \DeclareDocumentCommand{\RpgStatMod}{m}{

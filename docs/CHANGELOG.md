@@ -5,6 +5,12 @@
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [unreleased]
+
+* Improved the spacing on the saves and spell blocks
+* added the 'singular' flag to the legendary and mythic sections
+* Added the multiattack environment
+
 ## [1.1.0] 2027-11-10
 
 * Added a `source' field to the D&D statblocks

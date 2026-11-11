@@ -201,6 +201,11 @@
 			{
 				An alias for \cmd{attack}\texttt{[distance=ranged, <options>]\param{name}}.
 			}
+			\RpgEnvironment{RpgStatMultiAttack}[multiattack]{[name] \param{description}}
+			{
+				Provides a visually distinct grouping for actions which can be performed with a multiattack. Inside this block, \cmdref{RpgStatAction} has a different font, and is indented.
+
+			}
 
 
 			\RpgGetExample{dnd-stat-attacks}
@@ -292,6 +297,7 @@
 				\begin{RpgTable}{lXl}
 					Option & Effect & Default
 					\statRow{defiance}{A flag, which adds the homebrew `Legendary Defiance' action.}{\textit{(off)}}
+					\statRow{singular}{A flag, which removes the article `the' from the generated text, for statblocks that are a creature's name (not a species).}{\textit{(off)}}
 					\statRow{uses}{The number of legendary actions the creature may take.}{\texttt{3}}
 				\end{RpgTable}
 			}

@@ -33,6 +33,7 @@
 \RequirePackage {multicol}					
 \RequirePackage {microtype} % Improve ragged2e hyphenation and overfull boxes
 \RequirePackage {ragged2e}
+\RequirePackage {siunitx}					% number formatting (\RpgNumber)
 
 %% Might be needed later, so leave commented
 % \RequirePackage {etoolbox}					% Tools like \At

@@ -114,3 +114,42 @@
 		{th}
 	}
 }
+
+
+%%%%%%%%%%%%%%%%%%%
+% Number formatter
+%%%%%%%%%%%%%%%%%%%
+%% Formats numbers with digit grouping (2300 -> 2,300), in the surrounding font. The options are given on each call,
+%% rather than through \sisetup, so that a user's own siunitx commands are unaffected.
+%% Commas in the input are ignored (so 2,300 is not read as 2.3), and anything which is not a number is printed as given
+\tl_new:N \__rpg_numberSeparator
+\tl_new:N \__rpg_numberGroupDigits
+
+\NewDocumentCommand\RpgNumber{m}
+{
+	\siunitx_if_number:nTF {#1}
+	{
+		\num[
+			input-decimal-markers = {.},
+			input-ignore          = {,},
+			group-separator       = {\__rpg_numberSeparator},
+			group-minimum-digits  = {\__rpg_numberGroupDigits},
+			mode                  = text,
+			reset-text-family     = false,
+			reset-text-series     = false,
+			reset-text-shape      = false,
+		]{#1}
+	}
+	{ #1 }
+}
+\NewDocumentCommand\RpgNumberSetSeparator{m}
+{
+	\tl_set:Nn \__rpg_numberSeparator {#1}
+}
+\NewDocumentCommand\RpgNumberSetDigits{m}
+{
+	\tl_set:Nn \__rpg_numberGroupDigits {#1}
+}
+
+\RpgNumberSetSeparator{,}
+\RpgNumberSetDigits{4}

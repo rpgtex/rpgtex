@@ -87,6 +87,9 @@
 \RpgStatAddProperty {initiative}			{ \__dnd_statInitiativeBonus}{}
 \RpgStatAddProperty {source}				{ \__dnd_statSource}{}
 
+%% Other helpers
+\RpgStatAddBoolean	{singular}				{ \__dnd_statIsSingular}
+\tl_clear_new:N \__dnd_statArticle{}
 
 %% Attributes
 %%define the hooks for stats and save-bools
@@ -137,6 +140,15 @@
 	% % check if values provided; otherwise compute from default assumptions
 	\__dnd_checkInitiative:
 	\__dnd_checkPP:
+
+	%% check if singular, else set `the' as article
+	\bool_if:NTF{\__dnd_statIsSingular}
+	{
+		\tl_set:Nn\__dnd_statArticle{}
+	}
+	{
+		\tl_set:Nn\__dnd_statArticle{the\ }
+	}
 }
 
 % Defines a bunch of commands; or redefines existing ones; within the statblock scope
@@ -156,7 +168,9 @@
 	\ProvideDocumentCommand		{\save}{m O{}}		{\RpgStatSaveEffect{##1}[##2]}
 	%attacks
 	\ProvideDocumentCommand		{\attack}{m O{}}	{\RpgStatAttack{##1}[##2]}
+	\ProvideDocumentEnvironment	{multiattack}{O{Multiattack} m}		{\begin{RpgStatMultiAttack}[##1]{##2}}{\end{RpgStatMultiAttack}}
 	\ProvideDocumentCommand		{\melee}{m O{}}		{\RpgStatAttack{##1}[##2,distance=melee]}
+	\ProvideDocumentEnvironment	{spells}{O{}}		{\begin{RpgStatSpells}[##1]}{\end{RpgStatSpells}}
 	\ProvideDocumentCommand		{\ranged}{m O{}}	{\RpgStatAttack{##1}[##2,distance=ranged]}
 	%spellss
 	\ProvideDocumentEnvironment	{spells}{O{}}		{\begin{RpgStatSpells}[##1]}{\end{RpgStatSpells}}

@@ -36,10 +36,13 @@
 
 	\__dnd_statSaveMakeText:
 
-	\begin{description}[itemindent=2em]
-		\item[On~Failure:]\ \__dnd_statSaveFail
-		      \tl_if_empty:eF{\__dnd_statSaveSuccess}{\item[On~Success:]\ \__dnd_statSaveSuccess}
-	\end{description}
+	% \begin{description}[itemindent=0em,nosep,topsep=-2pt]
+	% 	%%the two spaces here make on failure and on success line up!
+	% 	\item[On~Failure:]\ \ \__dnd_statSaveFail
+	% 	      \tl_if_empty:eF{\__dnd_statSaveSuccess}{\item[On~Success:]\ \__dnd_statSaveSuccess}
+	% \end{description}
+	\ \textit{On~Failure: }\ \__dnd_statSaveFail.\
+	\tl_if_empty:eF{\__dnd_statSaveSuccess}{\textit{On~Success:}\ \__dnd_statSaveSuccess}
 	\group_end:
 }
 

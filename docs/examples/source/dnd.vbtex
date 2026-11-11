@@ -104,11 +104,13 @@
 % highlight = RpgStat, melee, ranged, attack, RpgStatMod
 	\begin{RpgStat}{Bandit Captain}[str=15, DEX=16, cr=2,type={Humanoid (Elf)}]
 		\section{Actions}
-			\melee{Scimitar}[modifier=dex, dmg=1d6+\RpgStatMod{dex}, dmg-type=slashing]
 			\ranged{Dagger}[modifier=dex, range=20/60, dmg=1d4+2*\RpgStatMod{dex}, dmg-type=piercing]
-			\attack{Spear}[distance=both, reach=5, range=20/60, dmg=1d6+\RpgStatMod{str}, dmg-type=piercing,
-				or-dmg=1d6+2*\RpgStatMod{str}, or-type=piercing, or-when={when used with two hands}]
+			\attack{Spear}[distance=both, reach=5, range=20/60, dmg=1d6+\RpgStatMod{str}, dmg-type=piercing, or-dmg=1d6+2*\RpgStatMod{str}, or-type=piercing, or-when={when used with two hands}]
+
+			\begin{multiattack}[Spinning Swords]{The \name{} makes three attacks with any combination of its Scimitar or Flame Blade}
+			\melee{Scimitar}[modifier=dex, dmg=1d6+\RpgStatMod{dex}, dmg-type=slashing]
 			\melee{Flame Blade}[type=spell, modifier=cha, dmg=3d6, dmg-type=fire]
+			\end{multiattack}
 	\end{RpgStat}
 
 % example = dnd-stat-full
@@ -129,7 +131,10 @@
 		\section{Traits}
 			\trait{Fiery Aura} At the start of each of its turns, each creature within 5ft of \name{} takes \RpgDice{1d6} fire damage.
 		\section{Actions}
+
+			\begin{multiattack}[Raking Claws]{\name{} makes thirty attacks with its Claws}
 			\melee{Claw}[dmg=2d6+5, dmg-type=slashing, plus-dmg=1d6, plus-type=fire]
+			\end{multiattack}
 	\end{RpgStat}
 
 % example = dnd-stat-legacy
