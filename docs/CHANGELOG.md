@@ -13,7 +13,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Added the \\RpgStatName* and \\RpgStatName** variants. Updated the legenndary actions to use this 
 * Added the \RpgNumber formatter and its helpers. Updated dnd statblocks to use this for their xp field
 * Added the 'self' option for \RpgStatSaves in dnd stat blocks
-
+* Added the custom-origin option for RpgStatSaves
 ## [1.1.0] 2027-11-10
 
 * Added a `source' field to the D&D statblocks

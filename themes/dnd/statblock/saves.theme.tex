@@ -14,6 +14,8 @@
 	\RpgThemeTLChoiceKey{target}	{\__dnd_statSaveTarget}	{creature,enemy} {creature}
 	\RpgThemeTLKey{size}			{\__dnd_statSaveSize}	{60}
 	\RpgThemeTLKey{origin}			{\__dnd_statSaveOrigin}	{}
+	\RpgThemeTLKey{custom-origin}			{\__dnd_statSaveCustomOrigin}	{}
+	\RpgThemeTLKey{custom-shape}			{\__dnd_statSaveCustomOrigin}	{}
 
 	\RpgThemeTLKey{failure}			{\__dnd_statSaveFail}	{}
 	\RpgThemeTLKey{fail}			{\__dnd_statSaveFail}	{}
@@ -52,11 +54,17 @@
 	\__dnd_statSaveText
 	\__dnd_append_if_missing:nn{\__dnd_statSaveSize}{ft}
 
-	\str_if_eq:eeTF{\__dnd_statSaveShape}{single}
+	\tl_if_empty:eTF{\__dnd_statSaveCustomOrigin}
 	{
-		One\ \__dnd_statSaveTarget\ within\ \__dnd_statSaveSize	}
+		\str_if_eq:eeTF{\__dnd_statSaveShape}{single}
+		{
+			One\ \__dnd_statSaveTarget\ within\ \__dnd_statSaveSize	}
+		{
+			\__dnd_statShapeText:
+		}
+	}
 	{
-		\__dnd_statShapeText:
+		\__dnd_statSaveCustomOrigin
 	}
 	\dndSaveStringMustMake\ DC\ \__dnd_statSaveDC\ \__dnd_statSaveNiceName\ save.
 
@@ -64,6 +72,7 @@
 
 \cs_set_protected:Npn \__dnd_statShapeText:
 {
+
 	\tl_if_empty:eF{\__dnd_statSaveOrigin}
 	{
 		Choose\ a\ point\ \__dnd_statSaveOrigin.\
@@ -82,8 +91,6 @@
 			{cube}{\ in\ a\ \__dnd_statSaveSize\ cube}
 			{self}{\ within\ \__dnd_statSaveSize\ of\ \RpgStatName*{}}
 	}
-
-
 }
 
 %%%%%%%%%%%%%%%%
