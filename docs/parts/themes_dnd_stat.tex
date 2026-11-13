@@ -159,6 +159,10 @@
 			{
 				Begins a trait or action called \texttt{name}, followed by its description. The \texttt{cost} is the number of legendary actions it uses, and is shown as `(2 actions)'. It is also available as \cmd*{trait}.
 			}
+			\RpgEnvironment{RpgStatSubActions}[subactions]{\param{name} \param{description}}
+			{
+				An action made up of other actions: the attacks of a multiattack, a set of options to choose from, or the results of a roll. The \param{name} and \param{description} are set as an ordinary \cmdref{RpgStatAction}, and the body is indented beneath it with a bar down its left side. Inside the body, \cmdref{RpgStatAction} uses a different font.
+			}
 			\RpgFunction{RpgStatReaction}[reaction]{\param{name}\param{trigger}}
 			{
 				Begins a reaction called \texttt{name}, followed by its \texttt{trigger} in italics, and its description. If the \texttt{trigger} is empty, it is left out.
@@ -210,13 +214,10 @@
 			{
 				An alias for \cmd{attack}\texttt{[distance=ranged, <options>]\param{name}}.
 			}
-			\RpgEnvironment{RpgStatMultiAttack}[multiattack]{[name] \param{description}}
+			\RpgEnvironment{multiattack}{[name] \param{description}}
 			{
-				Provides a visually distinct grouping for actions which can be performed with a multiattack. Inside this block, \cmdref{RpgStatAction} has a different font, and is indented.
-
+				An alias for \envref{RpgStatSubActions}, with the name defaulting to `Multiattack'.
 			}
-
-
 			\RpgGetExample{dnd-stat-attacks}
 
 		\subsubsection{Saving Throws}

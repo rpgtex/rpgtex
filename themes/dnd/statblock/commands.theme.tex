@@ -16,7 +16,7 @@
 				\vspace {2pt}
 				\hrule height 0.6pt
 				\par
-			}}\ignorespaces\nopagebreak
+			}}\nopagebreak\ignorespaces\noindent
 }
 
 % Inline header for stat actions - similar to a paragraph
@@ -24,7 +24,7 @@
 % optional arg is used by legendary actions
 
 \bool_set_false:N \__dnd_inLegendary
-\bool_set_false:N{\__dnd_statInMultiAttack}
+\bool_if_exist:NF \__dnd_statInSubActions { \bool_new:N \__dnd_statInSubActions }
 \DeclareDocumentCommand {\RpgStatAction} {O{} m}
 {
 	\par
@@ -35,7 +35,7 @@
 	{ \int_compare_p:nNn { \lastpenalty } = { 10000 } }
 	{ \skip_vertical:N \__dnd_statActionSkip }
 	\noindent {
-		\bool_if:NTF{\__dnd_statInMultiAttack}{\gillius\bfseries}{\RpgFontParagraph }#2
+		\bool_if:NTF{\__dnd_statInSubActions}{\gillius\bfseries}{\RpgFontParagraph }#2
 
 		\bool_if:NTF\__dnd_inLegendary
 		{
@@ -45,6 +45,27 @@
 		}
 		.
 	}
+}
+
+% An action whose body is a run of sub-actions (the attacks of a multiattack, a set of options, a roll table), indented
+% under a bar. #1 = the action's name, #2 = the text on its line, before the sub-actions
+% aliased in the environment by subactions, and by multiattack (with the name defaulting to Multiattack)
+\tcbset{rpgstatsubactions/.style={
+	blank, breakable,
+	borderline~west={0.8pt}{0pt}{StatblockRule},
+	left=10pt, before~skip=2pt, after~skip=5pt,
+}}
+\DeclareDocumentEnvironment{RpgStatSubActions}{m m}
+{
+	\RpgStatAction{#1}
+	\tl_if_blank:nF{#2}{~#2}
+	\par
+	%% local to the environment, so a nested block restores its parent's setting when it ends
+	\bool_set_true:N \__dnd_statInSubActions
+	\begin{tcolorbox}[rpgstatsubactions]
+}
+{
+	\end{tcolorbox}
 }
 
 % As with action, but allows for an italicised trigger

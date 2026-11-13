@@ -168,7 +168,8 @@
 	\ProvideDocumentCommand		{\save}{m O{}}		{\RpgStatSaveEffect{##1}[##2]}
 	%attacks
 	\ProvideDocumentCommand		{\attack}{m O{}}	{\RpgStatAttack{##1}[##2]}
-	\ProvideDocumentEnvironment	{multiattack}{O{Multiattack} m}		{\begin{RpgStatMultiAttack}[##1]{##2}}{\end{RpgStatMultiAttack}}
+	\ProvideDocumentEnvironment	{subactions}{m m}				{\begin{RpgStatSubActions}{##1}{##2}}{\end{RpgStatSubActions}}
+	\ProvideDocumentEnvironment	{multiattack}{O{Multiattack} m}	{\begin{RpgStatSubActions}{##1}{##2}}{\end{RpgStatSubActions}}
 	\ProvideDocumentCommand		{\melee}{m O{}}		{\RpgStatAttack{##1}[##2,distance=melee]}
 	\ProvideDocumentEnvironment	{spells}{O{}}		{\begin{RpgStatSpells}[##1]}{\end{RpgStatSpells}}
 	\ProvideDocumentCommand		{\ranged}{m O{}}	{\RpgStatAttack{##1}[##2,distance=ranged]}

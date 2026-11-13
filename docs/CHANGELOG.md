@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * A large number of changes and improvements to the dnd-theme implementation of RpgStat:
     * Improved the spacing on the saves and spell blocks
     * added the 'singular' flag for the spellcasting, legendary and mythic sections
-    * Added the multiattack environment
+    * Added the RpgStatSubActions environment (aliased as subactions), for actions made up of other actions, and the multiattack alias for it
     * Added the \\RpgStatName* and \\RpgStatName** variants. Updated the legendary actions to use this 
     * Updated to use RpgNumber for xp fields
     * Added the 'self' option for \RpgStatSaves
