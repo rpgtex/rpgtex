@@ -28,7 +28,12 @@
 \DeclareDocumentCommand {\RpgStatAction} {O{} m}
 {
 	\par
-	\dim_compare:nNnT { \prevdepth } > { -999pt } { \smallskip }
+	%% no skip at the top of the box (\prevdepth is -1000pt), or straight after a \RpgStatSection (which ends with
+	%% \nopagebreak, so the last item on the list is a 10000 penalty)
+	\bool_lazy_or:nnF
+	{ \dim_compare_p:nNn { \prevdepth } < { -999pt } }
+	{ \int_compare_p:nNn { \lastpenalty } = { 10000 } }
+	{ \skip_vertical:N \__dnd_statActionSkip }
 	\noindent {
 		\bool_if:NTF{\__dnd_statInMultiAttack}{\gillius\bfseries}{\RpgFontParagraph }#2
 

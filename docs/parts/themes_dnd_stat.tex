@@ -351,6 +351,29 @@
 
 		The example of legendary and mythic actions \RpgPage[p]{S:Legendary} uses \texttt{RpgStat*}: since this manual is in one column, the statblock is placed where it appears, with its contents in two columns.
 
+	\subsection{Indents \& Skips}
+
+		By default, a tcolorbox (the environment we use for creating statblocks) sets the \cmd{parskip} and \cmd{parindent} lengths to \texttt{0pt} throughout the environment, independent of the global variables that have been set.
+
+		We have provided a wrapper which changes these values for statblocks, as the visual spacing can be very important to tune correctly, and what works for one user may not work for others.
+
+		\RpgFunction{RpgStatParIndent}{\param{dimension}}
+		{
+			Sets the indent level for plaintext paragraphs within subsequent statblocks. Trait and action headers are never indented. Default value is 1em.
+		}
+		\RpgFunction{RpgStatParSkip}{\param{dimension}}
+		{
+			Sets the gap between plaintext paragraphs within subsequent statblocks. This affects only plain-text or paragraphs within actions. The gap between actions is the ActionSkip (see below).
+
+			Accepts flexible-glue style arguments i.e. `5pt plus 2pt minus 2pt'. Default value is 0pt.
+		}
+		\RpgFunction{RpgStatActionSkip}{\param{dimension}}
+		{
+			Sets the gap inserted above each \cmd{RpgStatAction} and everything which derives from it (\cmd{trait}, \cmd{attack}, \cmd{save} etc.)
+
+			Accepts flexible-glue style arguments i.e. `5pt plus 2pt minus 2pt'. Default value is 0.5em.
+		}
+
 	\subsection{Card Mode}
 
 		In card mode, which is turned on with \cmd{RpgSwitch}\param{UseStatCard}\param{on} \RpgPage[p]{Cmd:RpgSwitch}, the statblock is typeset on a card, without its frame and background. The abilities, and the commands which create them, are the same.

@@ -31,7 +31,31 @@
 \DeclareTColorBox {RpgStatBox} { O{}} {rpgstatbox, #1}
 
 
+
+
 \ExplSyntaxOn
+
+%%%% modifying lengths in statblock
+%% The tcolorbox style below holds the variables, not their values, so the setters only need to set the variables:
+%% the values are read as each statblock opens
+%% guarded, since a theme can be loaded more than once
+\skip_if_exist:NF \__dnd_statParSkip    { \skip_new:N \__dnd_statParSkip }
+\dim_if_exist:NF  \__dnd_statParIndent  { \dim_new:N  \__dnd_statParIndent }
+\skip_if_exist:NF \__dnd_statActionSkip { \skip_new:N \__dnd_statActionSkip }
+
+\NewDocumentCommand\RpgStatParSkip    {m} { \skip_set:Nn \__dnd_statParSkip    {#1} }
+\NewDocumentCommand\RpgStatParIndent  {m} { \dim_set:Nn  \__dnd_statParIndent  {#1} }
+\NewDocumentCommand\RpgStatActionSkip {m} { \skip_set:Nn \__dnd_statActionSkip {#1} }
+
+%% set the initial defaults
+\skip_set:Nn \__dnd_statParSkip    {0pt}
+\dim_set:Nn  \__dnd_statParIndent  {1em}
+\skip_set:Nn \__dnd_statActionSkip {0.5em}
+
+\tcbset{rpgstatbox/.append~style={before~upper={
+\skip_set_eq:NN \parskip   \__dnd_statParSkip
+\dim_set_eq:NN  \parindent \__dnd_statParIndent
+}}}
 
 %% Appearance modification
 \cs_set_protected_nopar:Npn \__dnd_appearancePreprocessing:
@@ -84,7 +108,7 @@
 
 	\tl_if_empty:eF{\__dnd_statSource}
 	{
-		\par \begin{minipage}[t]{0.5\linewidth}
+		\par \noindent\begin{minipage}[t]{0.5\linewidth}
 			}
 			\tl_if_empty:eF{\__dnd_statSubtitle}
 			{
@@ -104,6 +128,8 @@
 %%Formats Speed, hp, ability scores etc
 \DeclareDocumentCommand {\RpgHeaderBlock} {m}
 {
+	%% the statblock's \parskip is for its body text: the header is spaced by hand
+	\skip_zero:N \parskip
 	\RpgStatTitle{#1}
 	\RpgStatLine
 	\__dnd_stat_basics:
@@ -112,6 +138,8 @@
 	\RpgStatLine
 	\__dnd_stat_details:
 	\RpgStatLine
+	\skip_set_eq:NN \parskip \__dnd_statParSkip
+	\vspace{4pt}
 }
 
 %% BASIC BLOCK -- HP / AC / etc.

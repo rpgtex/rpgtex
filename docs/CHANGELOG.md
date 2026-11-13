@@ -7,13 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [unreleased]
 
-* Improved the spacing on the saves and spell blocks
-* added the 'singular' flag for the spellcasting, legendary and mythic sections of dnd stats
-* Added the multiattack environment
-* Added the \\RpgStatName* and \\RpgStatName** variants. Updated the legenndary actions to use this 
-* Added the \RpgNumber formatter and its helpers. Updated dnd statblocks to use this for their xp field
-* Added the 'self' option for \RpgStatSaves in dnd stat blocks
-* Added the custom-origin option for RpgStatSaves
+* Added the RpgNumber formatter and associated setters, allows auto-formatting of numbers: 1000->1,000
+* A large number of changes and improvements to the dnd-theme implementation of RpgStat:
+    * Improved the spacing on the saves and spell blocks
+    * added the 'singular' flag for the spellcasting, legendary and mythic sections
+    * Added the multiattack environment
+    * Added the \\RpgStatName* and \\RpgStatName** variants. Updated the legendary actions to use this 
+    * Updated to use RpgNumber for xp fields
+    * Added the 'self' option for \RpgStatSaves
+    * Added the custom-origin option for RpgStatSaves
+    * Added the proper handling of indents and skips 
 ## [1.1.0] 2027-11-10
 
 * Added a `source' field to the D&D statblocks
